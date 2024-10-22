@@ -9,7 +9,7 @@ import { universalItems } from "@/constants/universalItems";
 import SearchOptions from "@/components/SearchOptions";
 import { format, toZonedTime } from "date-fns-tz";
 import Modal from "@/components/Modal";
-import NasaCardSkeleton from "@/components/NasaCardSkeleton"; // Import the NasaCardSkeleton
+import NasaCardSkeleton from "@/components/NasaCardSkeleton";
 
 interface NasaData {
   data: {
