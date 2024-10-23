@@ -5,7 +5,7 @@ import {
     CardDescription,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card";
+} from "./ui/card";
 import { Badge } from "./ui/badge";
 import Image from "next/image";
 import { useState, useRef } from "react";
@@ -44,9 +44,7 @@ const NasaCard = ({
     const [isExpanded, setIsExpanded] = useState(false);
     const videoRef = useRef<HTMLVideoElement | null>(null);
 
-    const toggleDescription = () => {
-        setIsExpanded((prev) => !prev);
-    };
+
 
     const shouldShowReadMore = description.length > 100;
     const isVideo = typeof mediaUrl === 'string' && (mediaUrl.endsWith('.mp4') || mediaUrl.endsWith('.mov'));

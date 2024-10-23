@@ -1,15 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import MainLayout from "@/layouts/MainLayout";
-import SearchBar from "@/components/SearchBar";
-import { searchNasaData } from "@/services/nasaAPI";
-import NasaCard from "@/components/NasaCard";
-import { universalItems } from "@/constants/universalItems";
-import SearchOptions from "@/components/SearchOptions";
+import MainLayout from "../../layouts/MainLayout";
+import SearchBar from "../../components/SearchBar";
+import { searchNasaData } from "../../services/nasaAPI";
+import NasaCard from "../../components/NasaCard";
+import { universalItems } from "../../constants/universalItems";
+import SearchOptions from "../../components/SearchOptions";
 import { format, toZonedTime } from "date-fns-tz";
-import Modal from "@/components/Modal";
-import NasaCardSkeleton from "@/components/NasaCardSkeleton";
+import Modal from "../../components/Modal";
+import NasaCardSkeleton from "../../components/NasaCardSkeleton";
 
 interface NasaData {
   data: {
@@ -34,7 +34,7 @@ const SearchPage = () => {
   const handleSearch = async (query: string) => {
     setError(null);
     setSearchResults([]);
-    setIsLoading(true); // Set loading state to true
+    setIsLoading(true);
 
     try {
       const results = await searchNasaData(query);
@@ -43,7 +43,7 @@ const SearchPage = () => {
     } catch (error) {
       setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
-      setIsLoading(false); // Set loading state to false
+      setIsLoading(false);
     }
   };
 

@@ -1,10 +1,10 @@
 "use client";
 
-import { LampContainer } from "@/components/ui/lamp";
+import { LampContainer } from "../components/ui/lamp";
 import { motion } from "framer-motion";
-import MainLayout from "@/layouts/MainLayout";
+import MainLayout from "../layouts/MainLayout";
 import Link from "next/link"; // Import Link for navigation
-import { BackgroundGradient } from "@/components/ui/background-gradient";
+import { BackgroundGradient } from "../components/ui/background-gradient";
 
 const HomePage = () => {
   return (

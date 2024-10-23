@@ -7,9 +7,9 @@ export const searchNasaData = async (query: string) => {
       }
 
       const data = await response.json();
-      return data.collection.items; // Return the items from the response
+      return data.collection.items;
     } catch (error) {
       console.error('Error fetching NASA data:', error);
-      throw error; // Rethrow the error for handling in the calling component
+      throw error;
     }
   };

@@ -1,5 +1,5 @@
 "use client";
-import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
+import { Sidebar, SidebarBody, SidebarLink } from "../components/ui/sidebar";
 import { ReactNode } from "react";
 import { Home, Search, Info } from "lucide-react"; // Importing icons from lucide-react
 
@@ -18,7 +18,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
     <div className="min-h-screen flex bg-gray-900">
       {/* Sidebar on the left */}
       <Sidebar>
-        <SidebarBody>
+        <SidebarBody className="overflow-y-auto">
           {links.map((link) => (
             <SidebarLink key={link.href} link={link} />
           ))}
