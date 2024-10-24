@@ -15,6 +15,7 @@ To run the client-side application locally, follow these steps:
     npm run i
 
 3. Start the development server:
+    ```bash
     npm run dev
 
 ## File Structuring
