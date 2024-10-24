@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import {useState} from "react";
 import MainLayout from "../../layouts/MainLayout";
 import SearchBar from "../../components/SearchBar";
-import { searchNasaData } from "../../services/nasaAPI";
+import {searchNasaData} from "../../services/nasaAPI";
 import NasaCard from "../../components/NasaCard";
-import { universalItems } from "../../constants/universalItems";
+import {universalItems} from "../../constants/universalItems";
 import SearchOptions from "../../components/SearchOptions";
-import { format, toZonedTime } from "date-fns-tz";
-import Modal from "../../components/Modal";
+import {format, toZonedTime} from "date-fns-tz";
+import Modal from "../../components/NasaCardModal";
 import NasaCardSkeleton from "../../components/NasaCardSkeleton";
 
 interface NasaData {
@@ -21,7 +21,7 @@ interface NasaData {
     nasa_id: string;
     title: string;
   }[];
-  links: { href: string }[];
+  links: {href: string}[];
 }
 
 const SearchPage = () => {
@@ -57,78 +57,108 @@ const SearchPage = () => {
     setSelectedCard(null);
   };
 
+  const renderSearchBar = () => <SearchBar onSearch={handleSearch} />;
+
+  const renderSearchOptions = () => (
+    <div className="mt-4">
+      <SearchOptions
+        items={universalItems}
+        onSearch={handleSearch}
+      />
+    </div>
+  );
+
+  const renderErrorMessage = () =>
+    error && <div className="text-red-600">{error}</div>;
+
+  const renderLoadingSkeletons = () => (
+    <div className="grid grid-cols-3 gap-4">
+      {[...Array(6)].map((_, index) => (
+        <NasaCardSkeleton key={index} />
+      ))}
+    </div>
+  );
+
+  const renderSearchResults = () => (
+    <div className="grid grid-cols-3 gap-4">
+      {searchResults.map((item, index) => {
+        const mediaItem = item.data[0] || {};
+        const title = mediaItem.title || "No title";
+        const description = mediaItem.description || "No description";
+        const mediaUrl =
+          item.links && item.links.length > 0 ? item.links[0]?.href : "";
+        const mediaAlt = title;
+        const badge = mediaItem.media_type || "Unknown Media Type";
+        const date = mediaItem.date_created;
+        const estDate = date
+          ? format(toZonedTime(new Date(date), "America/New_York"), "yyyy-MM-dd HH:mm zzz")
+          : "";
+        const keywords = mediaItem.keywords || [];
+
+        return (
+          <NasaCard
+            key={index}
+            title={title}
+            description={description}
+            mediaUrl={mediaUrl}
+            mediaAlt={mediaAlt}
+            badge={badge}
+            date={estDate}
+            tags={keywords}
+            onReadMore={() =>
+              handleReadMore({
+                title,
+                description,
+                mediaUrl,
+                mediaAlt,
+                date: estDate,
+                tags: keywords,
+                badge,
+              })
+            }
+          />
+        );
+      })}
+    </div>
+  );
+
+  const renderNoResultsMessage = () => (
+    <div className="text-gray-600 text-center">No results to display.</div>
+  );
+
+  const renderContent = () => {
+    if (isLoading) {
+      return renderLoadingSkeletons();
+    }
+    if (error) {
+      return renderErrorMessage();
+    }
+    if (searchResults.length > 0) {
+      return renderSearchResults();
+    }
+    return renderNoResultsMessage();
+  };
+
+  const renderModal = () => {
+    return <Modal
+      isOpen={isModalOpen}
+      onClose={handleCloseModal}
+      title={selectedCard?.title}
+      description={selectedCard?.description}
+      mediaUrl={selectedCard?.mediaUrl}
+      mediaAlt={selectedCard?.mediaAlt}
+      date={selectedCard?.date}
+      tags={selectedCard?.tags}
+      badge={selectedCard?.badge}
+    />;
+  };
+
   return (
     <MainLayout>
-      <SearchBar onSearch={handleSearch} />
-      <div className="mt-4">
-        <SearchOptions items={universalItems} onSearch={handleSearch} />
-      </div>
-      <div className="mt-6">
-        {error && <div className="text-red-600">{error}</div>}
-
-        {isLoading ? ( // Render skeletons while loading
-          <div className="grid grid-cols-3 gap-4">
-            {[...Array(6)].map((_, index) => (
-              <NasaCardSkeleton key={index} />
-            ))}
-          </div>
-        ) : searchResults.length > 0 ? (
-          <div className="grid grid-cols-3 gap-4">
-            {searchResults.map((item, index) => {
-              const mediaItem = item.data[0] || {};
-              const title = mediaItem.title || "No title";
-              const description = mediaItem.description || "No description";
-              const mediaUrl =
-                item.links && item.links.length > 0 ? item.links[0]?.href : null;
-              const mediaAlt = title;
-              const badge = mediaItem.media_type || "Unknown Media Type";
-              const date = mediaItem.date_created;
-              const estDate = date
-                ? format(toZonedTime(new Date(date), "America/New_York"), "yyyy-MM-dd HH:mm zzz")
-                : "";
-              const keywords = mediaItem.keywords || [];
-
-              return (
-                <NasaCard
-                  key={index}
-                  title={title}
-                  description={description}
-                  mediaUrl={mediaUrl}
-                  mediaAlt={mediaAlt}
-                  badge={badge}
-                  date={estDate}
-                  tags={keywords}
-                  onReadMore={() =>
-                    handleReadMore({
-                      title,
-                      description,
-                      mediaUrl,
-                      mediaAlt,
-                      date: estDate,
-                      tags: keywords,
-                      badge,
-                    })
-                  }
-                />
-              );
-            })}
-          </div>
-        ) : (
-          <div className="text-gray-600 text-center">No results to display.</div>
-        )}
-      </div>
-
-      <Modal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        title={selectedCard?.title}
-        description={selectedCard?.description}
-        mediaUrl={selectedCard?.mediaUrl}
-        mediaAlt={selectedCard?.mediaAlt}
-        date={selectedCard?.date}
-        tags={selectedCard?.tags}
-        badge={selectedCard?.badge}
-      />
+      {renderSearchBar()}
+      {renderSearchOptions()}
+      <div className="mt-6">{renderContent()}</div>
+      {renderModal()}
     </MainLayout>
   );
 };

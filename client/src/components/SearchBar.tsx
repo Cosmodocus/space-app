@@ -17,21 +17,29 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
     }
   };
 
+  const renderInput = () => (
+    <Input
+      type="text"
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+      placeholder="Search anything space related (e.g. earth, moon, etc)..."
+      className="w-full rounded-r-none"
+    />
+  );
+
+  const renderButton = () => (
+    <Button
+      type="submit"
+      className="bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 rounded-l-none"
+    >
+      Search
+    </Button>
+  );
+
   return (
     <form onSubmit={handleSubmit} className="flex w-full max-w-lg mx-auto">
-      <Input
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search anything space related (e.g. earth, moon, etc)..."
-        className="w-full rounded-r-none"
-      />
-      <Button
-        type="submit"
-        className="bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 rounded-l-none"
-      >
-        Search
-      </Button>
+      {renderInput()}
+      {renderButton()}
     </form>
   );
 };
