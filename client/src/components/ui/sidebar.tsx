@@ -5,7 +5,7 @@ import React, { useState, createContext, useContext } from "react";
 import {  motion } from "framer-motion";
 
 interface Links {
-  label: string;
+  title: string;
   href: string;
   icon: React.JSX.Element | React.ReactNode;
 }
@@ -130,7 +130,7 @@ export const SidebarLink = ({
         }}
         className="text-white text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
       >
-        {link.label}
+        {link.title}
       </motion.span>
     </Link>
   );

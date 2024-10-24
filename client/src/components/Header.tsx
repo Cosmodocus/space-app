@@ -1,7 +1,7 @@
 "use client";
 
 interface HeaderProps {
-  title: string;
+  title?: string | null;
 }
 
 const Header: React.FC<HeaderProps> = ({ title }) => {

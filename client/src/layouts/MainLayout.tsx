@@ -15,9 +15,9 @@ type MainLayoutProps = {
 };
 
 const links = [
-  { label: "Home", href: "/", icon: <Home size={20} /> },
-  { label: "Search", href: "/search", icon: <Search size={20} /> },
-  { label: "About", href: "/about", icon: <Info size={20} /> },
+  { title: "Home", href: "/", icon: <Home size={20} /> },
+  { title: "Search", href: "/search", icon: <Search size={20} /> },
+  { title: "About", href: "/about", icon: <Info size={20} /> },
 ];
 
 const MainLayout = ({ children, headerTitle }: MainLayoutProps) => {
@@ -39,7 +39,7 @@ const MainLayout = ({ children, headerTitle }: MainLayoutProps) => {
         <div className="flex flex-col items-center mb-4">
           <SidebarLink
             link={{
-              label: "Guest",
+              title: "Guest",
               href: "/",
               icon: (
                 <Image
