@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Client-Side App
 
-## Getting Started
+This is a client-side application built with Next.js, utilizing Tailwind CSS for styling and various components for a seamless user experience.
 
-First, run the development server:
+## Running the Client-Side App
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+To run the client-side application locally, follow these steps:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Navigate to the client directory:
+   ```bash
+   cd client
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Install the dependencies:
+    ```bash
+    npm run i
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Start the development server:
+    npm run dev
 
-## Learn More
+## File Structuring
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+src/
+  ├── app/                  # App router
+  │   ├── search/           # Search page
+  │   ├── layout.tsx        # Layout component for the app
+  │   └── page.tsx          # Home page component
+  ├── components/           # UI components
+  │   ├── ui/               # Components from Shadcn & Aceturnity UI
+  │   ├── Header.tsx        # Generic modular header for customizing titles on pages
+  │   ├── NasaCard.tsx      # Card component that renders a media type, title, description, and more
+  │   ├── NasaCardModal.tsx  # Modal component for additional info about NasaCard
+  │   ├── NasaCardSkeleton.tsx # Skeleton loader for better UX resembling NasaCard shape
+  │   ├── SearchBar.tsx     # Input component for user search queries
+  │   └── SearchOptions.tsx  # Options for easier access to the NASA API search, connected to SearchBar
+  ├── layouts/              # Layout components
+  │   └── MainLayout.tsx     # Consists of sidebar, floating dock, and main content as children
+  ├── services/             # Logic for connecting to external data or API
+  ├── next.config.ts        # Configuration file for Next.js
+  ├── package.json          # Contains project metadata and dependencies
+  ├── package-lock.json     # Locks the versions of installed packages
+  ├── tailwind.config.ts     # Configuration file for Tailwind CSS
+  └── tsconfig.json         # Configuration file for TypeScript
