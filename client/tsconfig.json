@@ -25,7 +25,8 @@
     "paths": {
       "@/*": [
         "./client/src"
-      ]
+      ],
+      "@assets/*": ["./assets/*"]
     }
   },
   "include": [

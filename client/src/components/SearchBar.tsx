@@ -23,14 +23,14 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
       value={query}
       onChange={(e) => setQuery(e.target.value)}
       placeholder="Search anything space related (e.g. earth, moon, etc)..."
-      className="w-full rounded-r-none"
+      className="w-full rounded-r-none rounded-l-2xl"
     />
   );
 
   const renderButton = () => (
     <Button
       type="submit"
-      className="bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 rounded-l-none"
+      className="bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 rounded-l-none rounded-r-2xl"
     >
       Search
     </Button>

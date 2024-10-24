@@ -1,13 +1,13 @@
 "use client";
 
-import {useState} from "react";
+import { useState } from "react";
 import MainLayout from "../../layouts/MainLayout";
 import SearchBar from "../../components/SearchBar";
-import {searchNasaData} from "../../services/nasaAPI";
+import { searchNasaData } from "../../services/nasaAPI";
 import NasaCard from "../../components/NasaCard";
-import {universalItems} from "../../constants/universalItems";
+import { universalItems } from "../../constants/universalItems";
 import SearchOptions from "../../components/SearchOptions";
-import {format, toZonedTime} from "date-fns-tz";
+import { format, toZonedTime } from "date-fns-tz";
 import Modal from "../../components/NasaCardModal";
 import NasaCardSkeleton from "../../components/NasaCardSkeleton";
 
@@ -21,7 +21,7 @@ interface NasaData {
     nasa_id: string;
     title: string;
   }[];
-  links: {href: string}[];
+  links: { href: string }[];
 }
 
 const SearchPage = () => {
@@ -57,22 +57,22 @@ const SearchPage = () => {
     setSelectedCard(null);
   };
 
-  const renderSearchBar = () => <SearchBar onSearch={handleSearch} />;
-
-  const renderSearchOptions = () => (
-    <div className="mt-4">
-      <SearchOptions
-        items={universalItems}
-        onSearch={handleSearch}
-      />
+  const renderSearchBar = () => (
+    <div className="flex flex-col sm:flex-row justify-between items-center mb-4">
+      <SearchBar onSearch={handleSearch} />
     </div>
   );
 
-  const renderErrorMessage = () =>
-    error && <div className="text-red-600">{error}</div>;
+  const renderSearchOptions = () => (
+    <div className="mt-4 mx-4 md:mx-6 lg:mx-8">
+      <SearchOptions items={universalItems} onSearch={handleSearch} />
+    </div>
+  );
+
+  const renderErrorMessage = () => error && <div className="text-red-600">{error}</div>;
 
   const renderLoadingSkeletons = () => (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       {[...Array(6)].map((_, index) => (
         <NasaCardSkeleton key={index} />
       ))}
@@ -80,13 +80,12 @@ const SearchPage = () => {
   );
 
   const renderSearchResults = () => (
-    <div className="grid grid-cols-3 gap-4">
-      {searchResults.map((item, index) => {
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {searchResults.map((item) => {
         const mediaItem = item.data[0] || {};
         const title = mediaItem.title || "No title";
         const description = mediaItem.description || "No description";
-        const mediaUrl =
-          item.links && item.links.length > 0 ? item.links[0]?.href : "";
+        const mediaUrl = item.links && item.links.length > 0 ? item.links[0]?.href : "";
         const mediaAlt = title;
         const badge = mediaItem.media_type || "Unknown Media Type";
         const date = mediaItem.date_created;
@@ -94,10 +93,11 @@ const SearchPage = () => {
           ? format(toZonedTime(new Date(date), "America/New_York"), "yyyy-MM-dd HH:mm zzz")
           : "";
         const keywords = mediaItem.keywords || [];
+        console.log(mediaItem.nasa_id)
 
         return (
           <NasaCard
-            key={index}
+            key={mediaItem.nasa_id}
             title={title}
             description={description}
             mediaUrl={mediaUrl}
@@ -122,8 +122,9 @@ const SearchPage = () => {
     </div>
   );
 
+
   const renderNoResultsMessage = () => (
-    <div className="text-gray-600 text-center">No results to display.</div>
+    <div className="text-gray-300 text-center">No results to display.</div>
   );
 
   const renderContent = () => {
@@ -140,21 +141,23 @@ const SearchPage = () => {
   };
 
   const renderModal = () => {
-    return <Modal
-      isOpen={isModalOpen}
-      onClose={handleCloseModal}
-      title={selectedCard?.title}
-      description={selectedCard?.description}
-      mediaUrl={selectedCard?.mediaUrl}
-      mediaAlt={selectedCard?.mediaAlt}
-      date={selectedCard?.date}
-      tags={selectedCard?.tags}
-      badge={selectedCard?.badge}
-    />;
+    return (
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        title={selectedCard?.title}
+        description={selectedCard?.description}
+        mediaUrl={selectedCard?.mediaUrl}
+        mediaAlt={selectedCard?.mediaAlt}
+        date={selectedCard?.date}
+        tags={selectedCard?.tags}
+        badge={selectedCard?.badge}
+      />
+    );
   };
 
   return (
-    <MainLayout>
+    <MainLayout headerTitle="NASA Search">
       {renderSearchBar()}
       {renderSearchOptions()}
       <div className="mt-6">{renderContent()}</div>

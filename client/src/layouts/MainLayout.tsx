@@ -1,38 +1,66 @@
 "use client";
+import { ReactNode, useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "../components/ui/sidebar";
-import { ReactNode } from "react";
 import { Home, Search, Info } from "lucide-react";
-
+import { FloatingDockMobile } from "../components/ui/floating-dock";
+import { ShootingStars } from "../components/ui/shooting-stars";
+import { StarsBackground } from "../components/ui/stars-background";
+import Header from "../components/Header";
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
 type MainLayoutProps = {
   children: ReactNode;
+  headerTitle?: string | null;
 };
 
 const links = [
-  { label: 'Home', href: '/', icon: <Home size={20} /> },
-  { label: 'Search', href: '/search', icon: <Search size={20} /> },
-  { label: 'About', href: '/about', icon: <Info size={20} /> },
+  { label: "Home", href: "/", icon: <Home size={20} /> },
+  { label: "Search", href: "/search", icon: <Search size={20} /> },
+  { label: "About", href: "/about", icon: <Info size={20} /> },
 ];
 
-const MainLayout = ({ children }: MainLayoutProps) => {
+const MainLayout = ({ children, headerTitle }: MainLayoutProps) => {
+  const [open, setOpen] = useState(false);
 
   const renderSidebar = () => (
-    <Sidebar>
-      <SidebarBody className="overflow-y-auto">
-        {links.map((link) => (
-          <SidebarLink key={link.href} link={link} />
-        ))}
+    <Sidebar open={open} setOpen={setOpen}>
+      <SidebarBody className=" bg-neutral-900 bg-opacity-70 hidden md:flex flex-col h-full">
+        <div className="flex flex-col items-center mb-10">
+          {open ? <Logo /> : <LogoIcon />}
+        </div>
+
+        <div className="flex-1">
+          {links.map((link) => (
+            <SidebarLink key={link.href} link={link} />
+          ))}
+        </div>
+
+        <div className="flex flex-col items-center mb-4">
+          <SidebarLink
+            link={{
+              label: "Guest",
+              href: "/",
+              icon: (
+                <Image
+                  src="https://via.placeholder.com/50"
+                  className="h-7 w-7 flex-shrink-0 rounded-full"
+                  width={50}
+                  height={50}
+                  alt="Avatar"
+                />
+              ),
+            }}
+          />
+        </div>
       </SidebarBody>
     </Sidebar>
   );
 
-  const renderHeader = () => (
-    <header className="w-full p-6 bg-gradient-to-r from-teal-500 to-indigo-500 text-white shadow-lg">
-      <h1 className="text-3xl font-bold text-center">NASA Search</h1>
-    </header>
-  );
+  const renderHeader = () => <Header title={headerTitle} />;
 
   const renderMainContent = () => (
-    <main className="w-full max-w-8xl p-4">
+    <main className="relative z-10 w-full max-w-8xl p-4 flex-1 overflow-y-auto">
       {children}
     </main>
   );
@@ -45,9 +73,12 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   );
 
   const renderLayout = () => (
-    <div className="min-h-screen flex bg-gray-900">
+    <div className="min-h-screen flex bg-gray-900 relative">
+      <ShootingStars />
+      <StarsBackground />
       {renderSidebar()}
       {renderMainContainer()}
+      <FloatingDockMobile items={links} />
     </div>
   );
 
@@ -55,3 +86,31 @@ const MainLayout = ({ children }: MainLayoutProps) => {
 };
 
 export default MainLayout;
+
+export const Logo = () => {
+  return (
+    <Link
+      href="/"
+      className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
+    >
+      <div className="h-5 w-6 bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
+      <motion.span
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="font-medium text-white whitespace-pre"
+      >CosmoNauts
+      </motion.span>
+    </Link>
+  );
+};
+
+export const LogoIcon = () => {
+  return (
+    <Link
+      href="/"
+      className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
+    >
+      <div className="h-5 w-6 bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
+    </Link>
+  );
+};

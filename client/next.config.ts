@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['images-assets.nasa.gov'], // Add other domains if necessary
+    domains: ['images-assets.nasa.gov', 'via.placeholder.com'], // Add other domains if necessary
   },
 };
 

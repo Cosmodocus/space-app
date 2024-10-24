@@ -23,7 +23,7 @@ const SearchOptions: React.FC<SearchOptionsProps> = ({
   );
 
   const renderOptions = () => (
-    <div className={`flex flex-wrap gap-2 mb-3 items-center justify-center ${className}`}>
+    <div className={`hidden md:flex flex-wrap gap-2 mb-3 items-center justify-center ${className}`}>
       {items.map(renderButton)}
     </div>
   );
