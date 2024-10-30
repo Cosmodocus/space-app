@@ -8,7 +8,7 @@ import Modal from '../../components/NasaCardModal';
 import NasaCardSkeleton from '../../components/NasaCardSkeleton';
 import SearchBar from '../../components/SearchBar';
 import SearchOptions from '../../components/SearchOptions';
-import { universalItems } from '../../constants/universalItems';
+import { searchOptions1 } from '../../constants/searchOptions';
 import MainLayout from '../../layouts/MainLayout';
 import { searchNasaData } from '../../services/nasaAPI';
 
@@ -73,7 +73,7 @@ const SearchPage = () => {
 
   const renderSearchOptions = () => (
     <div className="mt-4 mx-4 md:mx-6 lg:mx-8">
-      <SearchOptions items={universalItems} onSearch={handleSearch} />
+      <SearchOptions items={searchOptions1} onSearch={handleSearch} />
     </div>
   );
 
@@ -81,7 +81,7 @@ const SearchPage = () => {
     error && <div className="text-red-600">{error}</div>;
 
   const renderLoadingSkeletons = () => (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {[...Array(6)].map((_, index) => (
         <NasaCardSkeleton key={index} />
       ))}

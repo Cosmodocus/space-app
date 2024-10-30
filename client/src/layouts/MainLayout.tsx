@@ -1,24 +1,31 @@
 'use client';
-import { motion } from 'framer-motion';
+
 import { Home, Info, Search } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { ReactNode, useState } from 'react';
 
 import Header from '../components/Header';
 import { FloatingDockMobile } from '../components/ui/floating-dock';
 import { ShootingStars } from '../components/ui/shooting-stars';
-import { Sidebar, SidebarBody, SidebarLink } from '../components/ui/sidebar';
+import {
+  Logo,
+  LogoIcon,
+  Sidebar,
+  SidebarBody,
+  SidebarLink
+} from '../components/ui/sidebar';
 import { StarsBackground } from '../components/ui/stars-background';
+import { ROUTES } from '../constants/routes';
+
 type MainLayoutProps = {
   children: ReactNode;
   headerTitle?: string | null;
 };
 
 const links = [
-  { title: 'Home', href: '/', icon: <Home size={20} /> },
-  { title: 'Search', href: '/search', icon: <Search size={20} /> },
-  { title: 'About', href: '/about', icon: <Info size={20} /> }
+  { title: 'Home', href: ROUTES.HOME, icon: <Home size={20} /> },
+  { title: 'Search', href: ROUTES.SEARCH, icon: <Search size={20} /> },
+  { title: 'About', href: ROUTES.ABOUT, icon: <Info size={20} /> }
 ];
 
 const MainLayout = ({ children, headerTitle }: MainLayoutProps) => {
@@ -26,7 +33,7 @@ const MainLayout = ({ children, headerTitle }: MainLayoutProps) => {
 
   const renderSidebar = () => (
     <Sidebar open={open} setOpen={setOpen}>
-      <SidebarBody className=" bg-neutral-900 bg-opacity-70 hidden md:flex flex-col h-full">
+      <SidebarBody className="bg-neutral-900 bg-opacity-70 hidden md:flex flex-col h-full">
         <div className="flex flex-col items-center mb-10">
           {open ? <Logo /> : <LogoIcon />}
         </div>
@@ -87,32 +94,3 @@ const MainLayout = ({ children, headerTitle }: MainLayoutProps) => {
 };
 
 export default MainLayout;
-
-export const Logo = () => {
-  return (
-    <Link
-      href="/"
-      className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
-    >
-      <div className="h-5 w-6 bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="font-medium text-white whitespace-pre"
-      >
-        CosmoNauts
-      </motion.span>
-    </Link>
-  );
-};
-
-export const LogoIcon = () => {
-  return (
-    <Link
-      href="/"
-      className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
-    >
-      <div className="h-5 w-6 bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
-    </Link>
-  );
-};

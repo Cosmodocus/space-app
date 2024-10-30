@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Link, { LinkProps } from 'next/link';
 import React, { createContext, useContext, useState } from 'react';
 
+import { ROUTES } from '../../constants/routes';
 import { cn } from '../../lib/utils';
 
 interface Links {
@@ -132,6 +133,35 @@ export const SidebarLink = ({
       >
         {link.title}
       </motion.span>
+    </Link>
+  );
+};
+
+export const Logo = () => {
+  return (
+    <Link
+      href={ROUTES.HOME}
+      className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
+    >
+      <div className="h-5 w-6 bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
+      <motion.span
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="font-medium text-white whitespace-pre"
+      >
+        CosmoNauts
+      </motion.span>
+    </Link>
+  );
+};
+
+export const LogoIcon = () => {
+  return (
+    <Link
+      href={ROUTES.HOME}
+      className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
+    >
+      <div className="h-5 w-6 bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
     </Link>
   );
 };

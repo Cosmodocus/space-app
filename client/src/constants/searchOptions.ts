@@ -1,4 +1,4 @@
-export const universalItems = [
+export const searchOptions1 = [
   'Mercury',
   'Venus',
   'Earth',
