@@ -1,12 +1,12 @@
-"use client";
+'use client';
 import React, {
   useState,
   useEffect,
   useRef,
   RefObject,
   useCallback,
-} from "react";
-import { cn } from "../../lib/utils";
+} from 'react';
+import { cn } from '../../lib/utils';
 
 interface StarProps {
   x: number;
@@ -62,14 +62,14 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
       twinkleProbability,
       minTwinkleSpeed,
       maxTwinkleSpeed,
-    ]
+    ],
   );
 
   useEffect(() => {
     const updateStars = () => {
       if (canvasRef.current) {
         const canvas = canvasRef.current;
-        const ctx = canvas.getContext("2d");
+        const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
         const { width, height } = canvas.getBoundingClientRect();
@@ -104,7 +104,7 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     let animationFrameId: number;
@@ -137,7 +137,7 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
   return (
     <canvas
       ref={canvasRef}
-      className={cn("h-full w-full absolute inset-0", className)}
+      className={cn('h-full w-full absolute inset-0', className)}
     />
   );
 };

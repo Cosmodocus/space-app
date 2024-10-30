@@ -1,21 +1,13 @@
-import { Skeleton } from "./ui/skeleton";
+import { Skeleton } from './ui/skeleton';
 
 const NasaCardSkeleton = () => {
-  const renderImageSkeleton = () => (
-    <Skeleton className="h-48 w-full" />
-  );
+  const renderImageSkeleton = () => <Skeleton className="h-48 w-full" />;
 
-  const renderTitleSkeleton = () => (
-    <Skeleton className="h-6 w-1/4 mb-2" />
-  );
+  const renderTitleSkeleton = () => <Skeleton className="h-6 w-1/4 mb-2" />;
 
-  const renderDateSkeleton = () => (
-    <Skeleton className="h-4 w-3/4 mb-3" />
-  );
+  const renderDateSkeleton = () => <Skeleton className="h-4 w-3/4 mb-3" />;
 
-  const renderBadgeSkeleton = () => (
-    <Skeleton className="h-4 w-1/4 mb-2" />
-  );
+  const renderBadgeSkeleton = () => <Skeleton className="h-4 w-1/4 mb-2" />;
 
   const renderTagsSkeleton = () => (
     <div className="flex flex-wrap gap-2 mb-3">

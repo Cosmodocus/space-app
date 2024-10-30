@@ -1,21 +1,20 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import { Search } from "lucide-react";
-
+import { Search } from 'lucide-react';
 
 type SearchBarProps = {
   onSearch: (query: string) => void;
 };
 
 const SearchBar = ({ onSearch }: SearchBarProps) => {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
       onSearch(query.trim());
-      setQuery("");
+      setQuery('');
     }
   };
 
@@ -34,7 +33,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
       type="submit"
       className="bg-indigo-600 text-white hover:bg-indigo-700 transition-all duration-300 rounded-r-2xl p-3 shadow-lg transform rounded-l-none"
     >
-      <Search  style={{ width: '24px', height: '24px' }}/>
+      <Search style={{ width: '24px', height: '24px' }} />
     </Button>
   );
 

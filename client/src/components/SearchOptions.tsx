@@ -1,4 +1,5 @@
-import { BackgroundGradient } from "./ui/background-gradient";
+import React from 'react';
+import { BackgroundGradient } from './ui/background-gradient';
 
 interface SearchOptionsProps {
   items: string[];
@@ -23,7 +24,9 @@ const SearchOptions: React.FC<SearchOptionsProps> = ({
   );
 
   const renderOptions = () => (
-    <div className={`hidden md:flex flex-wrap gap-2 mb-3 items-center justify-center ${className}`}>
+    <div
+      className={`hidden md:flex flex-wrap gap-2 mb-3 items-center justify-center ${className}`}
+    >
       {items.map(renderButton)}
     </div>
   );

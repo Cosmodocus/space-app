@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { Badge } from "./ui/badge";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "./ui/card";

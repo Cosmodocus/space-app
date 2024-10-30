@@ -1,12 +1,11 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import MainLayout from "../layouts/MainLayout";
-import Link from "next/link";
-import { BackgroundGradient } from "../components/ui/background-gradient";
-import { ShootingStars } from "../components/ui/shooting-stars";
-import { StarsBackground } from "../components/ui/stars-background";
-
+import { motion } from 'framer-motion';
+import MainLayout from '../layouts/MainLayout';
+import Link from 'next/link';
+import { BackgroundGradient } from '../components/ui/background-gradient';
+import { ShootingStars } from '../components/ui/shooting-stars';
+import { StarsBackground } from '../components/ui/stars-background';
 
 const HomePage = () => {
   const renderHeading = () => (
@@ -16,7 +15,7 @@ const HomePage = () => {
       transition={{
         delay: 0.3,
         duration: 0.8,
-        ease: "easeInOut",
+        ease: 'easeInOut',
       }}
       className="relative z-10 text-3xl md:text-7xl md:leading-tight max-w-5xl mx-auto text-center tracking-tight font-medium bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-white to-white"
     >
@@ -31,7 +30,7 @@ const HomePage = () => {
       transition={{
         delay: 0.5,
         duration: 0.6,
-        ease: "easeInOut",
+        ease: 'easeInOut',
       }}
       className="mt-6 flex justify-center"
     >
