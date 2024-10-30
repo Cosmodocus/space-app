@@ -17,7 +17,7 @@ interface SidebarContextProps {
 }
 
 const SidebarContext = createContext<SidebarContextProps | undefined>(
-  undefined,
+  undefined
 );
 
 export const useSidebar = () => {
@@ -32,7 +32,7 @@ export const SidebarProvider = ({
   children,
   open: openProp,
   setOpen: setOpenProp,
-  animate = true,
+  animate = true
 }: {
   children: React.ReactNode;
   open?: boolean;
@@ -55,7 +55,7 @@ export const Sidebar = ({
   children,
   open,
   setOpen,
-  animate,
+  animate
 }: {
   children: React.ReactNode;
   open?: boolean;
@@ -87,10 +87,10 @@ export const DesktopSidebar = ({
     <motion.div
       className={cn(
         'h-full min-h-screen px-4 py-4 hidden md:flex md:flex-col flex-shrink-0 bg-gradient-to-t text-white from-neutral-900 to-neutral-700 z-50', // Added z-50
-        className,
+        className
       )}
       animate={{
-        width: animate ? (open ? '140px' : '60px') : '300px',
+        width: animate ? (open ? '140px' : '60px') : '300px'
       }}
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
@@ -116,7 +116,7 @@ export const SidebarLink = ({
       href={link.href}
       className={cn(
         'flex items-center justify-start gap-2  group/sidebar py-2 ',
-        className,
+        className
       )}
       {...props}
     >
@@ -125,7 +125,7 @@ export const SidebarLink = ({
       <motion.span
         animate={{
           display: animate ? (open ? 'inline-block' : 'none') : 'inline-block',
-          opacity: animate ? (open ? 1 : 0) : 1,
+          opacity: animate ? (open ? 1 : 0) : 1
         }}
         className="text-white text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
       >

@@ -1,7 +1,7 @@
 import telescope from '@assets/svg/telescope.svg';
 
 const icons = {
-  telescope,
+  telescope
 };
 
 export default icons;

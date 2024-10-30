@@ -17,7 +17,7 @@ type MainLayoutProps = {
 const links = [
   { title: 'Home', href: '/', icon: <Home size={20} /> },
   { title: 'Search', href: '/search', icon: <Search size={20} /> },
-  { title: 'About', href: '/about', icon: <Info size={20} /> },
+  { title: 'About', href: '/about', icon: <Info size={20} /> }
 ];
 
 const MainLayout = ({ children, headerTitle }: MainLayoutProps) => {
@@ -49,7 +49,7 @@ const MainLayout = ({ children, headerTitle }: MainLayoutProps) => {
                   height={50}
                   alt="Avatar"
                 />
-              ),
+              )
             }}
           />
         </div>

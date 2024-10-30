@@ -22,5 +22,5 @@ export const universalItems = [
   'Red Supergiant',
   'Blue Supergiant',
   'Open Cluster',
-  'Star Cluster',
+  'Star Cluster'
 ];

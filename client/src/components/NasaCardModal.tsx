@@ -1,9 +1,15 @@
-"use client";
+'use client';
 
-import React, { useEffect, useRef } from "react";
-import Image from "next/image";
-import { Badge } from "./ui/badge";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "./ui/card";
+import React, { useEffect, useRef } from 'react';
+import Image from 'next/image';
+import { Badge } from './ui/badge';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent
+} from './ui/card';
 
 interface ModalProps {
   isOpen: boolean;
@@ -30,18 +36,18 @@ const Modal: React.FC<ModalProps> = ({
   tags,
   badge,
   mediaWidth = 400,
-  mediaHeight = 300,
+  mediaHeight = 300
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = 'unset';
     }
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = 'unset';
     };
   }, [isOpen]);
 
@@ -74,10 +80,14 @@ const Modal: React.FC<ModalProps> = ({
 
   const renderTags = () => {
     return (
-      tags && tags.length > 0 && (
+      tags &&
+      tags.length > 0 && (
         <div className="flex flex-wrap gap-1 mt-2">
           {tags.map((tag) => (
-            <Badge key={tag} className="text-xs bg-gray-700 border border-gray-600">
+            <Badge
+              key={tag}
+              className="text-xs bg-gray-700 border border-gray-600"
+            >
               {tag}
             </Badge>
           ))}
@@ -114,7 +124,6 @@ const Modal: React.FC<ModalProps> = ({
       {renderCardContent()}
     </Card>
   );
-
 
   return (
     <div

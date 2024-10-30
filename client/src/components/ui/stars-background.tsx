@@ -4,7 +4,7 @@ import React, {
   useEffect,
   useRef,
   RefObject,
-  useCallback,
+  useCallback
 } from 'react';
 import { cn } from '../../lib/utils';
 
@@ -31,7 +31,7 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
   twinkleProbability = 0.7,
   minTwinkleSpeed = 0.5,
   maxTwinkleSpeed = 1,
-  className,
+  className
 }) => {
   const [stars, setStars] = useState<StarProps[]>([]);
   const canvasRef: RefObject<HTMLCanvasElement> =
@@ -52,7 +52,7 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
           twinkleSpeed: shouldTwinkle
             ? minTwinkleSpeed +
               Math.random() * (maxTwinkleSpeed - minTwinkleSpeed)
-            : null,
+            : null
         };
       });
     },
@@ -61,14 +61,14 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
       allStarsTwinkle,
       twinkleProbability,
       minTwinkleSpeed,
-      maxTwinkleSpeed,
-    ],
+      maxTwinkleSpeed
+    ]
   );
 
   useEffect(() => {
     const updateStars = () => {
-      if (canvasRef.current) {
-        const canvas = canvasRef.current;
+      const canvas = canvasRef.current;
+      if (canvas) {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
@@ -82,13 +82,14 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
     updateStars();
 
     const resizeObserver = new ResizeObserver(updateStars);
-    if (canvasRef.current) {
-      resizeObserver.observe(canvasRef.current);
+    const currentCanvas = canvasRef.current;
+    if (currentCanvas) {
+      resizeObserver.observe(currentCanvas);
     }
 
     return () => {
-      if (canvasRef.current) {
-        resizeObserver.unobserve(canvasRef.current);
+      if (currentCanvas) {
+        resizeObserver.unobserve(currentCanvas);
       }
     };
   }, [
@@ -97,7 +98,7 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
     twinkleProbability,
     minTwinkleSpeed,
     maxTwinkleSpeed,
-    generateStars,
+    generateStars
   ]);
 
   useEffect(() => {

@@ -1,0 +1,10 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npm run lint && npm run format
+
+# Run lint and format for the client
+npm --prefix ./client run lint && npm --prefix ./client run format
+
+# Where to run lint and format for the server
+# npm --prefix ./server run lint && npm --prefix ./server run format

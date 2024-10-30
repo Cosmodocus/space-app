@@ -1,26 +1,33 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import MainLayout from "../../layouts/MainLayout";
-import SearchBar from "../../components/SearchBar";
-import { searchNasaData } from "../../services/nasaAPI";
-import NasaCard from "../../components/NasaCard";
-import { universalItems } from "../../constants/universalItems";
-import SearchOptions from "../../components/SearchOptions";
-import { format, toZonedTime } from "date-fns-tz";
-import Modal from "../../components/NasaCardModal";
-import NasaCardSkeleton from "../../components/NasaCardSkeleton";
+import { useState } from 'react';
+import MainLayout from '../../layouts/MainLayout';
+import SearchBar from '../../components/SearchBar';
+import { searchNasaData } from '../../services/nasaAPI';
+import NasaCard from '../../components/NasaCard';
+import { universalItems } from '../../constants/universalItems';
+import SearchOptions from '../../components/SearchOptions';
+import { format, toZonedTime } from 'date-fns-tz';
+import Modal from '../../components/NasaCardModal';
+import NasaCardSkeleton from '../../components/NasaCardSkeleton';
+
+interface NasaMedia {
+  center: string;
+  date: string;
+  date_created: string;
+  description: string;
+  keywords: string[];
+  media_type: string;
+  mediaUrl: string;
+  mediaAlt: string;
+  nasa_id: string;
+  title: string;
+  tags: string[];
+  badge: string;
+}
 
 interface NasaData {
-  data: {
-    center: string;
-    date_created: string;
-    description: string;
-    keywords: string[];
-    media_type: string;
-    nasa_id: string;
-    title: string;
-  }[];
+  data: NasaMedia[];
   links: { href: string }[];
 }
 
@@ -29,7 +36,7 @@ const SearchPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState<any>(null);
+  const [selectedCard, setSelectedCard] = useState<NasaMedia | null>(null);
 
   const handleSearch = async (query: string) => {
     setError(null);
@@ -41,13 +48,13 @@ const SearchPage = () => {
       setSearchResults(results);
       console.log(results);
     } catch (error) {
-      setError(error instanceof Error ? error.message : "An error occurred");
+      setError(error instanceof Error ? error.message : 'An error occurred');
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleReadMore = (cardData: any) => {
+  const handleReadMore = (cardData: NasaMedia) => {
     setSelectedCard(cardData);
     setIsModalOpen(true);
   };
@@ -69,7 +76,8 @@ const SearchPage = () => {
     </div>
   );
 
-  const renderErrorMessage = () => error && <div className="text-red-600">{error}</div>;
+  const renderErrorMessage = () =>
+    error && <div className="text-red-600">{error}</div>;
 
   const renderLoadingSkeletons = () => (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -83,17 +91,39 @@ const SearchPage = () => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {searchResults.map((item) => {
         const mediaItem = item.data[0] || {};
-        const title = mediaItem.title || "No title";
-        const description = mediaItem.description || "No description";
-        const mediaUrl = item.links && item.links.length > 0 ? item.links[0]?.href : "";
+        const title = mediaItem.title || 'No title';
+        const description = mediaItem.description || 'No description';
+        const mediaUrl =
+          Array.isArray(item.links) && item.links.length > 0
+            ? item.links[0]?.href
+            : '';
         const mediaAlt = title;
-        const badge = mediaItem.media_type || "Unknown Media Type";
+        const badge = mediaItem.media_type || 'Unknown Media Type';
         const date = mediaItem.date_created;
+
         const estDate = date
-          ? format(toZonedTime(new Date(date), "America/New_York"), "yyyy-MM-dd HH:mm zzz")
-          : "";
+          ? format(
+              toZonedTime(new Date(date), 'America/New_York'),
+              'yyyy-MM-dd HH:mm zzz'
+            )
+          : '';
+
         const keywords = mediaItem.keywords || [];
-        console.log(mediaItem.nasa_id)
+
+        const nasaMediaData: NasaMedia = {
+          center: mediaItem.center || 'Unknown Center',
+          date: estDate,
+          date_created: date || '',
+          description,
+          keywords,
+          media_type: mediaItem.media_type || 'Unknown Media Type',
+          mediaUrl,
+          mediaAlt,
+          nasa_id: mediaItem.nasa_id || '',
+          title,
+          tags: keywords,
+          badge
+        };
 
         return (
           <NasaCard
@@ -105,23 +135,12 @@ const SearchPage = () => {
             badge={badge}
             date={estDate}
             tags={keywords}
-            onReadMore={() =>
-              handleReadMore({
-                title,
-                description,
-                mediaUrl,
-                mediaAlt,
-                date: estDate,
-                tags: keywords,
-                badge,
-              })
-            }
+            onReadMore={() => handleReadMore(nasaMediaData)}
           />
         );
       })}
     </div>
   );
-
 
   const renderNoResultsMessage = () => (
     <div className="text-gray-300 text-center">No results to display.</div>
@@ -140,21 +159,19 @@ const SearchPage = () => {
     return renderNoResultsMessage();
   };
 
-  const renderModal = () => {
-    return (
-      <Modal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        title={selectedCard?.title}
-        description={selectedCard?.description}
-        mediaUrl={selectedCard?.mediaUrl}
-        mediaAlt={selectedCard?.mediaAlt}
-        date={selectedCard?.date}
-        tags={selectedCard?.tags}
-        badge={selectedCard?.badge}
-      />
-    );
-  };
+  const renderModal = () => (
+    <Modal
+      isOpen={isModalOpen}
+      onClose={handleCloseModal}
+      title={selectedCard?.title as string}
+      description={selectedCard?.description as string}
+      mediaUrl={selectedCard?.mediaUrl as string}
+      mediaAlt={selectedCard?.mediaAlt as string}
+      date={selectedCard?.date_created}
+      tags={selectedCard?.keywords}
+      badge={selectedCard?.media_type}
+    />
+  );
 
   return (
     <MainLayout headerTitle="NASA Search">

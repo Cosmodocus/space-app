@@ -11,7 +11,7 @@ import {
   motion,
   useMotionValue,
   useSpring,
-  useTransform,
+  useTransform
 } from 'framer-motion';
 import Link from 'next/link';
 import React, { useRef, useState } from 'react';
@@ -20,7 +20,7 @@ import { cn } from '../../lib/utils';
 export const FloatingDock = ({
   items,
   desktopClassName,
-  mobileClassName,
+  mobileClassName
 }: {
   items: { title: string; icon: React.ReactNode; href: string }[];
   desktopClassName?: string;
@@ -36,7 +36,7 @@ export const FloatingDock = ({
 
 export const FloatingDockMobile = ({
   items,
-  className,
+  className
 }: {
   items: { title: string; icon: React.ReactNode; href: string }[];
   className?: string;
@@ -84,7 +84,7 @@ export const FloatingDockMobile = ({
 
 const FloatingDockDesktop = ({
   items,
-  className,
+  className
 }: {
   items: { title: string; icon: React.ReactNode; href: string }[];
   className?: string;
@@ -96,7 +96,7 @@ const FloatingDockDesktop = ({
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
         'mx-auto hidden md:flex h-16 gap-4 items-end  rounded-2xl bg-gray-50 dark:bg-neutral-900 px-4 pb-3',
-        className,
+        className
       )}
     >
       {items.map((item) => (
@@ -110,7 +110,7 @@ function IconContainer({
   mouseX,
   title,
   icon,
-  href,
+  href
 }: {
   mouseX: MotionValue;
   title: string;
@@ -131,34 +131,34 @@ function IconContainer({
   const widthTransformIcon = useTransform(
     distance,
     [-150, 0, 150],
-    [20, 40, 20],
+    [20, 40, 20]
   );
   const heightTransformIcon = useTransform(
     distance,
     [-150, 0, 150],
-    [20, 40, 20],
+    [20, 40, 20]
   );
 
   const width = useSpring(widthTransform, {
     mass: 0.1,
     stiffness: 150,
-    damping: 12,
+    damping: 12
   });
   const height = useSpring(heightTransform, {
     mass: 0.1,
     stiffness: 150,
-    damping: 12,
+    damping: 12
   });
 
   const widthIcon = useSpring(widthTransformIcon, {
     mass: 0.1,
     stiffness: 150,
-    damping: 12,
+    damping: 12
   });
   const heightIcon = useSpring(heightTransformIcon, {
     mass: 0.1,
     stiffness: 150,
-    damping: 12,
+    damping: 12
   });
 
   const [hovered, setHovered] = useState(false);
