@@ -45,3 +45,6 @@ Run the application:
     python manage.py runserver
     ```
 
+## File Structuring
+
+![alt text](image.jpeg)
