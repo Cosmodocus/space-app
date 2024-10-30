@@ -1,17 +1,17 @@
+const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL
+
 export const searchNasaData = async (query: string) => {
   try {
-    const response = await fetch(
-      `https://images-api.nasa.gov/search?q=${encodeURIComponent(query)}`
-    );
+    const response = await fetch(`${backendUrl}/api/nasa-data/?query=${encodeURIComponent(query)}`);
 
     if (!response.ok) {
-      throw new Error('Failed to fetch data from NASA API');
+      throw new Error('Failed to fetch data from Django backend');
     }
 
     const data = await response.json();
-    return data.collection.items;
+    return data;
   } catch (error) {
-    console.error('Error fetching NASA data:', error);
+    console.error('Error fetching data from Django backend:', error);
     throw error;
   }
 };
