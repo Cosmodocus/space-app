@@ -1,8 +1,8 @@
-const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL
-
 export const searchNasaData = async (query: string) => {
   try {
-    const response = await fetch(`${backendUrl}/api/nasa-data/?query=${encodeURIComponent(query)}`);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_NASA_SEARCH}?query=${encodeURIComponent(query)}`
+    );
 
     if (!response.ok) {
       throw new Error('Failed to fetch data from Django backend');
