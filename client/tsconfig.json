@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -23,9 +19,7 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./client/src"
-      ],
+      "@/*": ["./client/src"],
       "@assets/*": ["./assets/*"]
     }
   },
@@ -36,7 +30,5 @@
     "client/next-env.d.ts",
     ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "client/node_modules"
-  ]
+  "exclude": ["client/node_modules"]
 }

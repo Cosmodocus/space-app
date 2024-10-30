@@ -7,16 +7,23 @@ This is a client-side application built with Next.js, utilizing Tailwind CSS for
 To run the client-side application locally, follow these steps:
 
 1. Navigate to the client directory:
+
    ```bash
    cd client
 
+   ```
+
 2. Install the dependencies:
-    ```bash
-    npm run i
+
+   ```bash
+   npm run i
+
+   ```
 
 3. Start the development server:
-    ```bash
-    npm run dev
+   ```bash
+   npm run dev
+   ```
 
 ## File Structuring
 
