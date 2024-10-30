@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { BackgroundGradient } from './ui/background-gradient';
 
 interface SearchOptionsProps {

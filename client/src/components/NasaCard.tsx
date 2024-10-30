@@ -1,9 +1,10 @@
 'use client';
 
-import { Card, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { Badge } from './ui/badge';
 import Image from 'next/image';
 import { useRef } from 'react';
+
+import { Badge } from './ui/badge';
+import { Card, CardDescription, CardHeader, CardTitle } from './ui/card';
 
 type NasaCardProps = {
   title: string;

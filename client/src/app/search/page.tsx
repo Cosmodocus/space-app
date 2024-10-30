@@ -1,15 +1,16 @@
 'use client';
 
-import { useState } from 'react';
-import MainLayout from '../../layouts/MainLayout';
-import SearchBar from '../../components/SearchBar';
-import { searchNasaData } from '../../services/nasaAPI';
-import NasaCard from '../../components/NasaCard';
-import { universalItems } from '../../constants/universalItems';
-import SearchOptions from '../../components/SearchOptions';
 import { format, toZonedTime } from 'date-fns-tz';
+import { useState } from 'react';
+
+import NasaCard from '../../components/NasaCard';
 import Modal from '../../components/NasaCardModal';
 import NasaCardSkeleton from '../../components/NasaCardSkeleton';
+import SearchBar from '../../components/SearchBar';
+import SearchOptions from '../../components/SearchOptions';
+import { universalItems } from '../../constants/universalItems';
+import MainLayout from '../../layouts/MainLayout';
+import { searchNasaData } from '../../services/nasaAPI';
 
 interface NasaMedia {
   center: string;

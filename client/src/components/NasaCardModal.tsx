@@ -1,14 +1,15 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import React, { useEffect, useRef } from 'react';
+
 import { Badge } from './ui/badge';
 import {
   Card,
-  CardHeader,
-  CardTitle,
+  CardContent,
   CardDescription,
-  CardContent
+  CardHeader,
+  CardTitle
 } from './ui/card';
 
 interface ModalProps {

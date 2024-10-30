@@ -1,14 +1,15 @@
 'use client';
-import { ReactNode, useState } from 'react';
-import { Sidebar, SidebarBody, SidebarLink } from '../components/ui/sidebar';
-import { Home, Search, Info } from 'lucide-react';
-import { FloatingDockMobile } from '../components/ui/floating-dock';
-import { ShootingStars } from '../components/ui/shooting-stars';
-import { StarsBackground } from '../components/ui/stars-background';
-import Header from '../components/Header';
+import { motion } from 'framer-motion';
+import { Home, Info, Search } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { ReactNode, useState } from 'react';
+
+import Header from '../components/Header';
+import { FloatingDockMobile } from '../components/ui/floating-dock';
+import { ShootingStars } from '../components/ui/shooting-stars';
+import { Sidebar, SidebarBody, SidebarLink } from '../components/ui/sidebar';
+import { StarsBackground } from '../components/ui/stars-background';
 type MainLayoutProps = {
   children: ReactNode;
   headerTitle?: string | null;

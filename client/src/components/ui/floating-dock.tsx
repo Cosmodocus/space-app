@@ -4,17 +4,18 @@
  * Mobile navbar is better positioned at bottom right.
  **/
 
-import { Menu } from 'lucide-react';
 import {
   AnimatePresence,
-  MotionValue,
   motion,
+  MotionValue,
   useMotionValue,
   useSpring,
   useTransform
 } from 'framer-motion';
+import { Menu } from 'lucide-react';
 import Link from 'next/link';
 import React, { useRef, useState } from 'react';
+
 import { cn } from '../../lib/utils';
 
 export const FloatingDock = ({

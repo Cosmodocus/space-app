@@ -1,11 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import MainLayout from '../layouts/MainLayout';
 import Link from 'next/link';
+
 import { BackgroundGradient } from '../components/ui/background-gradient';
 import { ShootingStars } from '../components/ui/shooting-stars';
 import { StarsBackground } from '../components/ui/stars-background';
+import MainLayout from '../layouts/MainLayout';
 
 const HomePage = () => {
   const renderHeading = () => (

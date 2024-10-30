@@ -1,8 +1,9 @@
 'use client';
-import { cn } from '../../lib/utils';
-import Link, { LinkProps } from 'next/link';
-import React, { useState, createContext, useContext } from 'react';
 import { motion } from 'framer-motion';
+import Link, { LinkProps } from 'next/link';
+import React, { createContext, useContext, useState } from 'react';
+
+import { cn } from '../../lib/utils';
 
 interface Links {
   title: string;
