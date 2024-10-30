@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
-import { Badge } from "./ui/badge";
-import Image from "next/image";
-import { useRef } from "react";
+import { Card, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Badge } from './ui/badge';
+import Image from 'next/image';
+import { useRef } from 'react';
 
 type NasaCardProps = {
   title: string;
@@ -34,14 +34,14 @@ const NasaCard = ({
   viewCount,
   location,
   badge,
-  onReadMore,
+  onReadMore
 }: NasaCardProps) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const shouldShowReadMore = description.length > 100;
   const isVideo =
-    typeof mediaUrl === "string" &&
-    (mediaUrl.endsWith(".mp4") || mediaUrl.endsWith(".mov"));
+    typeof mediaUrl === 'string' &&
+    (mediaUrl.endsWith('.mp4') || mediaUrl.endsWith('.mov'));
 
   const handleVideoClick = () => {
     if (videoRef.current) {
@@ -90,7 +90,9 @@ const NasaCard = ({
     <div className="flex flex-col">
       <CardTitle className="text-lg font-bold text-white">{title}</CardTitle>
       {date && <span className="text-xs text-gray-400 mb-1">{date}</span>}
-      {copyright && <span className="text-xs text-gray-400 mb-1">{copyright}</span>}
+      {copyright && (
+        <span className="text-xs text-gray-400 mb-1">{copyright}</span>
+      )}
       {tags.length > 0 && (
         <div className="flex flex-wrap gap-1 mb-2">
           {tags.map((tag) => (
@@ -109,7 +111,10 @@ const NasaCard = ({
   const renderRelatedLink = () => {
     return (
       relatedLink && (
-        <a href={relatedLink} className="text-blue-400 text-sm mb-1 hover:underline">
+        <a
+          href={relatedLink}
+          className="text-blue-400 text-sm mb-1 hover:underline"
+        >
           Learn more
         </a>
       )
@@ -138,9 +143,11 @@ const NasaCard = ({
     return (
       <CardDescription className="text-sm p-4 text-gray-200 rounded-b-lg">
         <div
-          className={`line-clamp-3 ${shouldShowReadMore ? "overflow-hidden" : ""}`}
+          className={`line-clamp-3 ${
+            shouldShowReadMore ? 'overflow-hidden' : ''
+          }`}
         >
-          {description || "No description"}
+          {description || 'No description'}
         </div>
         {shouldShowReadMore && (
           <div className="flex justify-between items-center mt-2">

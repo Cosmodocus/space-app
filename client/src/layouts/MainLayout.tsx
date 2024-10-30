@@ -1,23 +1,23 @@
-"use client";
-import { ReactNode, useState } from "react";
-import { Sidebar, SidebarBody, SidebarLink } from "../components/ui/sidebar";
-import { Home, Search, Info } from "lucide-react";
-import { FloatingDockMobile } from "../components/ui/floating-dock";
-import { ShootingStars } from "../components/ui/shooting-stars";
-import { StarsBackground } from "../components/ui/stars-background";
-import Header from "../components/Header";
-import Image from "next/image";
-import Link from "next/link";
-import { motion } from "framer-motion";
+'use client';
+import { ReactNode, useState } from 'react';
+import { Sidebar, SidebarBody, SidebarLink } from '../components/ui/sidebar';
+import { Home, Search, Info } from 'lucide-react';
+import { FloatingDockMobile } from '../components/ui/floating-dock';
+import { ShootingStars } from '../components/ui/shooting-stars';
+import { StarsBackground } from '../components/ui/stars-background';
+import Header from '../components/Header';
+import Image from 'next/image';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
 type MainLayoutProps = {
   children: ReactNode;
   headerTitle?: string | null;
 };
 
 const links = [
-  { title: "Home", href: "/", icon: <Home size={20} /> },
-  { title: "Search", href: "/search", icon: <Search size={20} /> },
-  { title: "About", href: "/about", icon: <Info size={20} /> },
+  { title: 'Home', href: '/', icon: <Home size={20} /> },
+  { title: 'Search', href: '/search', icon: <Search size={20} /> },
+  { title: 'About', href: '/about', icon: <Info size={20} /> }
 ];
 
 const MainLayout = ({ children, headerTitle }: MainLayoutProps) => {
@@ -39,8 +39,8 @@ const MainLayout = ({ children, headerTitle }: MainLayoutProps) => {
         <div className="flex flex-col items-center mb-4">
           <SidebarLink
             link={{
-              title: "Guest",
-              href: "/",
+              title: 'Guest',
+              href: '/',
               icon: (
                 <Image
                   src="https://via.placeholder.com/50"
@@ -49,7 +49,7 @@ const MainLayout = ({ children, headerTitle }: MainLayoutProps) => {
                   height={50}
                   alt="Avatar"
                 />
-              ),
+              )
             }}
           />
         </div>
@@ -98,7 +98,8 @@ export const Logo = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="font-medium text-white whitespace-pre"
-      >CosmoNauts
+      >
+        CosmoNauts
       </motion.span>
     </Link>
   );

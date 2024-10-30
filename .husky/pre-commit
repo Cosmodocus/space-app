@@ -1,0 +1,7 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+cd client
+
+echo "Running linter on client side..."
+npm run lint
